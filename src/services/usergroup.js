@@ -22,4 +22,18 @@ export default class UsergroupService {
             throw e;
         }
     }
+
+    async GetOne({ id }) {
+        try {
+            this.logger.silly('Get one usergroup by ID');
+
+            const usergroup = await this.usergroupModel.find({_id: id});
+
+            return { usergroup };
+        } catch (e) {
+            this.logger.error(e);
+
+            throw e;
+        }
+    }
 }

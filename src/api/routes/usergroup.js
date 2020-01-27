@@ -30,4 +30,21 @@ export default (app) => {
             }
         }
     );
+
+    route.get('/:id',
+        async (req, res, next) => {
+            const logger = Container.get('logger');
+            logger.debug('Calling Get ONE endpoint with body %o', req.params);
+
+            try {
+                const usergroupServiceInstance = Container.get(UsergroupService);
+                const { usergroup } = await usergroupServiceInstance.GetOne(req.params);
+                return res.status(200).json({ usergroup });
+            } catch (e) {
+                logger.error('error', e);
+
+                return next(e);
+            }
+        }
+    );
 }
