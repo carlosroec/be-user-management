@@ -1,4 +1,3 @@
-import { Service, Inject } from 'typedi';
 import jwt from 'jsonwebtoken';
 import argon2 from 'argon2';
 import { randomBytes } from 'crypto';
@@ -10,7 +9,7 @@ export default class AuthService {
         this.logger = container.get('logger');
     }
 
-    async SignUp({ name, email, password }) {
+    async SignUp({ name, username, email, password, usergroup }) {
         try {
             const salt = randomBytes(32);
 
@@ -20,9 +19,11 @@ export default class AuthService {
             this.logger.silly('Creating user DB record');
             const userRecord = await this.userModel.create({
                 name,
+                username,
                 email,
                 salt: salt.toString('hex'),
-                password: hashedPassword
+                password: hashedPassword,
+                usergroup
             });
 
             this.logger.silly('Generating JWT');
@@ -57,6 +58,10 @@ export default class AuthService {
         this.logger.silly('Password is valid!');
         this.logger.silly('Generating JWT');
         const token = this.generateToken(userRecord);
+
+        // Update last visit field
+        userRecord.lastVisit = new Date();
+        await userRecord.save();
 
         const user = userRecord.toObject();
         Reflect.deleteProperty(user, 'password');

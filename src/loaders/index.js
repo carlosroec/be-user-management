@@ -9,8 +9,12 @@ export default async (app) => {
 
     const models = [
         {
-            name: "userModel",
+            name: 'userModel',
             model: require('../models/user').default,
+        },
+        {
+            name: 'usergroupModel',
+            model: require('../models/usergroup').default,
         }
     ];
     await dependencyInjectorLoader(models);

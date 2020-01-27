@@ -12,8 +12,10 @@ export default (app) => {
         celebrate({
             body: Joi.object({
                 name: Joi.string().required(),
+                username: Joi.string().required(),
                 email: Joi.string().required(),
                 password: Joi.string().required(),
+                usergroup: Joi.string().required()
             }),
         }),
         async (req, res, next) => {
