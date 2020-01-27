@@ -1,5 +1,12 @@
 # USER MANAGEMENT
 
+# Stack
+
+    Node.js 10.x
+    Express
+    MongoDB
+    Mocha + Chai
+
 # SETUP
 1 Create a .env file at the root of the project
 
