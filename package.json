@@ -28,5 +28,13 @@
     "mongoose": "^5.8.9",
     "typedi": "^0.8.0",
     "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2016": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "nodemon": "^2.0.2"
   }
 }
