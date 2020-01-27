@@ -20,6 +20,7 @@ export default class UserService {
 
                 if (usergroup) console.log("enc", usergroup.name);
                 response.push({
+                    id: user._id,
                     name: user.name,
                     username: user.username,
                     email: user.email,
